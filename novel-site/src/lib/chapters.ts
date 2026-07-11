@@ -116,26 +116,14 @@ export async function getChapter(bookSlug: string, slug: string): Promise<Render
 
 async function findPublishedManuscripts(bookSlug: string): Promise<{ root: string; files: string[] }> {
   const bookRoot = path.join(novelsRoot, bookSlug);
-  const volume = "volume_01";
-  const manuscriptRoots = [
-    path.join(bookRoot, "chapters"),
-    path.join(bookRoot, "volumes", volume, "manuscript"),
-    path.join(bookRoot, "volumes", volume, "revisions", "v2_fast_pacing_attempt"),
-    path.join(bookRoot, "volumes", volume, "revisions", "v1_original")
-  ];
+  const root = path.join(bookRoot, "chapters");
 
-  for (const root of manuscriptRoots) {
-    try {
-      const files = await readdir(root);
-      if (files.some((file) => /^ch\d+_draft\.md$/.test(file))) {
-        return { root, files };
-      }
-    } catch {
-      continue;
-    }
+  try {
+    const files = await readdir(root);
+    return { root, files };
+  } catch {
+    return { root, files: [] };
   }
-
-  return { root: manuscriptRoots[0], files: [] };
 }
 
 function extractTitle(markdown: string): string | undefined {
