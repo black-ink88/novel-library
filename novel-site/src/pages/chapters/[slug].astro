@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import Comments from "@/components/Comments.astro";
 import { getBook, getChapter, getChapters } from "@/lib/chapters";
 
 export async function getStaticPaths() {
@@ -32,6 +33,7 @@ const next = chapters[currentIndex + 1];
     </header>
 
     <article class="prose" set:html={chapter.html} />
+    <Comments />
 
     <nav class="reader-nav" aria-label="회차 이동">
       {
