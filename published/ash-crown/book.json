@@ -1,12 +1,12 @@
 {
+  "language": "ko",
+  "author": "BLACKINK",
   "active_volume": "volume_01",
-  "current_chapter": 25,
   "title": "애쉬 크라운: 에르디아의 황혼",
   "status": "serializing",
-  "language": "ko",
-  "description": "검보다 변명에 익숙한 열일곱 왕자 레온이 사랑하던 왕국의 함락 속에서 살아남는 기사도 판타지.",
-  "slug": "ash-crown",
   "genre": "realistic_chivalric_fantasy",
   "cover": "/ash-crown-hero.png",
-  "author": "BLACKINK"
+  "description": "검보다 변명에 익숙한 열일곱 왕자 레온이 사랑하던 왕국의 함락 속에서 살아남는 기사도 판타지.",
+  "current_chapter": 25,
+  "slug": "ash-crown"
 }
