@@ -28,7 +28,6 @@ const first = chapters.at(0);
         </div>
         <div class="hero__actions">
           <a class="button button--primary" href={sitePath(first ? `/novels/${book.slug}/chapters/${first.slug}/` : `/novels/${book.slug}/contents/`)}>처음부터 읽기</a>
-          <a class="button button--ghost" href={sitePath(`/novels/${book.slug}/contents/`)}>목차</a>
         </div>
       </div>
     </section>
@@ -39,11 +38,17 @@ const first = chapters.at(0);
           <p class="section-label">Volume 01</p>
           <h2 id="chapter-list-title">목차</h2>
         </div>
-        <span>{chapters.length}회</span>
+        <div class="chapter-list__tools">
+          <span>{chapters.length}회</span>
+          <div class="chapter-sort" role="group" aria-label="회차 정렬">
+            <button class="chapter-sort__button is-active" type="button" data-sort="ascending" aria-pressed="true">처음부터</button>
+            <button class="chapter-sort__button" type="button" data-sort="descending" aria-pressed="false">최신화순</button>
+          </div>
+        </div>
       </div>
-      <div class="chapters chapters--single">
+      <div class="chapters chapters--single" id="chapter-list">
         {chapters.map((chapter) => (
-          <a class="chapter-card chapter-card--row" href={sitePath(`/novels/${book.slug}/chapters/${chapter.slug}/`)}>
+          <a class="chapter-card chapter-card--row" data-chapter-number={chapter.number} href={sitePath(`/novels/${book.slug}/chapters/${chapter.slug}/`)}>
             <span>{String(chapter.number).padStart(2, "0")}</span>
             <div>
               <h2>{chapter.title}</h2>
@@ -55,3 +60,29 @@ const first = chapters.at(0);
     </section>
   </main>
 </BaseLayout>
+
+<script>
+  const chapterList = document.querySelector<HTMLElement>("#chapter-list");
+  const sortButtons = document.querySelectorAll<HTMLButtonElement>("[data-sort]");
+
+  sortButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      if (!chapterList) return;
+
+      const cards = Array.from(chapterList.querySelectorAll<HTMLElement>("[data-chapter-number]"));
+      const descending = button.dataset.sort === "descending";
+      cards
+        .sort((a, b) => {
+          const difference = Number(a.dataset.chapterNumber) - Number(b.dataset.chapterNumber);
+          return descending ? -difference : difference;
+        })
+        .forEach((card) => chapterList.appendChild(card));
+
+      sortButtons.forEach((item) => {
+        const active = item === button;
+        item.classList.toggle("is-active", active);
+        item.setAttribute("aria-pressed", String(active));
+      });
+    });
+  });
+</script>
