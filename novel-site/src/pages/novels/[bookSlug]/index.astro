@@ -16,7 +16,7 @@ const first = chapters.at(0);
 
 <BaseLayout title={`${book.title} | 작품 홈`} description={book.description}>
   <main>
-    <section class="hero">
+    <section class="hero hero--book-home">
       {book.cover ? <img class="hero__image" src={sitePath(book.cover)} alt="" /> : <div class="hero__image hero__image--empty"></div>}
       <div class="hero__shade"></div>
       <div class="hero__content">
@@ -30,6 +30,27 @@ const first = chapters.at(0);
           <a class="button button--primary" href={sitePath(first ? `/novels/${book.slug}/chapters/${first.slug}/` : `/novels/${book.slug}/contents/`)}>처음부터 읽기</a>
           <a class="button button--ghost" href={sitePath(`/novels/${book.slug}/contents/`)}>목차</a>
         </div>
+      </div>
+    </section>
+
+    <section class="site-shell chapter-list" aria-labelledby="chapter-list-title">
+      <div class="chapter-list__header">
+        <div>
+          <p class="section-label">Volume 01</p>
+          <h2 id="chapter-list-title">목차</h2>
+        </div>
+        <span>{chapters.length}회</span>
+      </div>
+      <div class="chapters chapters--single">
+        {chapters.map((chapter) => (
+          <a class="chapter-card chapter-card--row" href={sitePath(`/novels/${book.slug}/chapters/${chapter.slug}/`)}>
+            <span>{String(chapter.number).padStart(2, "0")}</span>
+            <div>
+              <h2>{chapter.title}</h2>
+              <p>{chapter.excerpt}</p>
+            </div>
+          </a>
+        ))}
       </div>
     </section>
   </main>

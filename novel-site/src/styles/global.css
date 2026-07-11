@@ -172,6 +172,15 @@ a {
   background: #111;
 }
 
+.hero--book-home {
+  min-height: 0;
+}
+
+.hero--book-home .hero__content {
+  padding-top: 42px;
+  padding-bottom: 56px;
+}
+
 .hero__image,
 .hero__shade {
   position: absolute;
@@ -541,6 +550,10 @@ h1 {
 
   .hero {
     min-height: 82vh;
+  }
+
+  .hero--book-home {
+    min-height: 0;
   }
 
   .hero__image {
