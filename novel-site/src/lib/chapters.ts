@@ -4,6 +4,13 @@ import { marked } from "marked";
 
 const projectRoot = path.resolve(process.cwd(), "..");
 const novelsRoot = path.join(projectRoot, "published");
+const siteConfigPath = path.join(projectRoot, "site.json");
+
+export type SiteConfig = {
+  author: string;
+  name: string;
+  description: string;
+};
 
 export type Book = {
   title: string;
@@ -49,6 +56,11 @@ export async function getBooks(): Promise<Book[]> {
   );
 
   return books.filter((book): book is Book => Boolean(book));
+}
+
+export async function getSite(): Promise<SiteConfig> {
+  const raw = await readFile(siteConfigPath, "utf-8");
+  return JSON.parse(raw) as SiteConfig;
 }
 
 export async function getBook(slug = "ash-crown"): Promise<Book> {

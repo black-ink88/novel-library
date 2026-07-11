@@ -1,0 +1,11 @@
+{
+  "title": "새 작품 제목",
+  "slug": "new-novel",
+  "cover": "/new-novel-hero.png",
+  "description": "독자에게 보여줄 작품 소개를 적습니다.",
+  "language": "ko",
+  "genre": "genre_name",
+  "status": "serializing",
+  "current_chapter": 1,
+  "active_volume": "volume_01"
+}

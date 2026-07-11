@@ -1,17 +1,18 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { getBooks } from "@/lib/chapters";
+import { getBooks, getSite } from "@/lib/chapters";
 import { sitePath } from "@/lib/site";
 
 const books = await getBooks();
+const site = await getSite();
 ---
 
-<BaseLayout title="작품 서재" description="여러 소설을 모아 읽는 공개 서재">
+<BaseLayout title={site.name} description={site.description}>
   <main class="library-page">
     <header class="library-hero site-shell">
-      <p class="eyebrow">Private Library</p>
-      <h1>작품 서재</h1>
-      <p>한 편씩 쌓아 올린 이야기들을 이곳에 모읍니다.</p>
+      <p class="eyebrow">{site.author}</p>
+      <h1>{site.name}</h1>
+      <p>{site.description}</p>
     </header>
 
     <section class="site-shell library-list" aria-labelledby="library-title">
