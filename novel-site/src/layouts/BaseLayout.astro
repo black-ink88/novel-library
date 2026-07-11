@@ -1,0 +1,23 @@
+---
+import "../styles/global.css";
+
+type Props = {
+  title: string;
+  description?: string;
+};
+
+const { title, description = "애쉬 크라운: 에르디아의 황혼 연재 페이지" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

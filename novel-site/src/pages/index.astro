@@ -1,0 +1,43 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getBooks } from "@/lib/chapters";
+import { sitePath } from "@/lib/site";
+
+const books = await getBooks();
+---
+
+<BaseLayout title="작품 서재" description="여러 소설을 모아 읽는 공개 서재">
+  <main class="library-page">
+    <header class="library-hero site-shell">
+      <p class="eyebrow">Private Library</p>
+      <h1>작품 서재</h1>
+      <p>한 편씩 쌓아 올린 이야기들을 이곳에 모읍니다.</p>
+    </header>
+
+    <section class="site-shell library-list" aria-labelledby="library-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-label">Collection</p>
+          <h2 id="library-title">읽을 이야기</h2>
+        </div>
+        <span>{books.length}편</span>
+      </div>
+
+      <div class="book-grid">
+        {
+          books.map((book) => (
+            <a class="book-card" href={sitePath(`/novels/${book.slug}/`)}>
+              {book.cover ? <img src={sitePath(book.cover)} alt="" /> : <div class="book-card__placeholder"></div>}
+              <div class="book-card__shade"></div>
+              <div class="book-card__content">
+                <p class="book-card__label">{book.status === "completed" ? "완결" : "연재 중"}</p>
+                <h2>{book.title}</h2>
+                <span>작품 보기 <b aria-hidden="true">→</b></span>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+  </main>
+</BaseLayout>

@@ -1,0 +1,44 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getBook, getChapter, getChapters, getBooks } from "@/lib/chapters";
+import { sitePath } from "@/lib/site";
+
+export async function getStaticPaths() {
+  const books = await getBooks();
+  const paths = [];
+  for (const book of books) {
+    const chapters = await getChapters(book.slug);
+    paths.push(...chapters.map((chapter) => ({ params: { bookSlug: book.slug, slug: chapter.slug } })));
+  }
+  return paths;
+}
+
+const { bookSlug, slug } = Astro.params;
+const book = await getBook(bookSlug);
+const chapters = await getChapters(book.slug);
+const chapter = await getChapter(book.slug, slug ?? "");
+
+if (!chapter) {
+  return Astro.redirect(sitePath(`/novels/${book.slug}/contents/`));
+}
+
+const currentIndex = chapters.findIndex((item) => item.slug === chapter.slug);
+const previous = chapters[currentIndex - 1];
+const next = chapters[currentIndex + 1];
+---
+
+<BaseLayout title={`${chapter.title} | ${book.title}`} description={chapter.excerpt}>
+  <main class="reader">
+    <header class="reader-header">
+      <a class="home-link" href={sitePath(`/novels/${book.slug}/contents/`)}>목차</a>
+      <p>{book.title}</p>
+      <h1>{chapter.title}</h1>
+    </header>
+    <article class="prose" set:html={chapter.html} />
+    <nav class="reader-nav" aria-label="회차 이동">
+      {previous ? <a href={sitePath(`/novels/${book.slug}/chapters/${previous.slug}/`)}><span>이전화</span>{previous.title}</a> : <span></span>}
+      <a class="reader-nav__index" href={sitePath(`/novels/${book.slug}/contents/`)}>목차</a>
+      {next ? <a href={sitePath(`/novels/${book.slug}/chapters/${next.slug}/`)}><span>다음화</span>{next.title}</a> : <span></span>}
+    </nav>
+  </main>
+</BaseLayout>

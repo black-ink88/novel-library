@@ -1,0 +1,6 @@
+novel-site/node_modules/
+novel-site/dist/
+novel-site/.astro/
+.DS_Store
+.env
+.env.*

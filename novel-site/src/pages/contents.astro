@@ -1,0 +1,42 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getBook, getChapters } from "@/lib/chapters";
+
+const book = await getBook();
+const chapters = await getChapters();
+const first = chapters.at(0);
+---
+
+<BaseLayout title={`목차 | ${book.title}`}>
+  <main class="contents-page">
+    <header class="contents-hero">
+      <a class="home-link home-link--dark" href="/">작품 홈</a>
+      <p class="section-label">Volume 01</p>
+      <h1>목차</h1>
+      <p>{book.title}</p>
+      {
+        first && (
+          <a class="button button--primary contents-hero__button" href={`/chapters/${first.slug}/`}>
+            처음부터 읽기
+          </a>
+        )
+      }
+    </header>
+
+    <section class="site-shell chapter-list" aria-label="회차 목록">
+      <div class="chapters chapters--single">
+        {
+          chapters.map((chapter) => (
+            <a class="chapter-card chapter-card--row" href={`/chapters/${chapter.slug}/`}>
+              <span>{String(chapter.number).padStart(2, "0")}</span>
+              <div>
+                <h2>{chapter.title}</h2>
+                <p>{chapter.excerpt}</p>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+  </main>
+</BaseLayout>
