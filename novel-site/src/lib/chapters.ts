@@ -15,6 +15,7 @@ export type SiteConfig = {
 export type Book = {
   title: string;
   slug: string;
+  author?: string;
   language: string;
   genre: string;
   status: string;
@@ -22,6 +23,7 @@ export type Book = {
   active_volume?: string;
   cover?: string;
   description?: string;
+  synopsis?: string[];
 };
 
 export type Chapter = {

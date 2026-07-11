@@ -21,9 +21,11 @@ const first = chapters.at(0);
       <div class="hero__shade"></div>
       <div class="hero__content">
         <a class="home-link home-link--hero" href={sitePath("/")}>작품 서재</a>
-        <p class="eyebrow">{book.genre.replaceAll("_", " ")}</p>
+        <p class="eyebrow">{book.author ?? "BLACKINK"} · {book.genre.replaceAll("_", " ")}</p>
         <h1>{book.title}</h1>
-        <p class="hero__copy">{book.description ?? "이야기의 첫 장을 펼쳐 보세요."}</p>
+        <div class="hero__copy">
+          {book.synopsis?.map((paragraph) => <p>{paragraph}</p>) ?? <p>{book.description ?? "이야기의 첫 장을 펼쳐 보세요."}</p>}
+        </div>
         <div class="hero__actions">
           <a class="button button--primary" href={sitePath(first ? `/novels/${book.slug}/chapters/${first.slug}/` : `/novels/${book.slug}/contents/`)}>처음부터 읽기</a>
           <a class="button button--ghost" href={sitePath(`/novels/${book.slug}/contents/`)}>목차</a>

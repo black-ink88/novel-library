@@ -1,5 +1,6 @@
 {
   "title": "애쉬 크라운: 에르디아의 황혼",
+  "author": "BLACKINK",
   "current_chapter": 2,
   "active_volume": "volume_01",
   "cover": "/ash-crown-hero.png",
@@ -7,5 +8,10 @@
   "genre": "realistic_chivalric_fantasy",
   "language": "ko",
   "status": "serializing",
-  "description": "재능도 자격도 없던 왕자 레온은 몰락해 가는 왕국과 기사도의 무게 앞에서 다시 검을 든다."
+  "description": "검보다 변명에 익숙한 열일곱 왕자 레온의 성장과 몰락의 왕국을 다루는 기사도 판타지.",
+  "synopsis": [
+    "검보다 변명에 익숙한 열일곱 왕자 레온.",
+    "국왕의 생일을 기다리는 평온한 계절 속에서 그는 에블린과 티격태격하고, 북방에서 돌아온 스승을 좇으며 아직 소년으로 살아간다.",
+    "그러나 당연했던 사람과 일상이 무너지는 날, 레온은 처음으로 자신의 검을 들어야 한다."
+  ]
 }

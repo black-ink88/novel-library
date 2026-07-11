@@ -233,6 +233,14 @@ h1 {
   font-size: clamp(1.05rem, 2vw, 1.35rem);
 }
 
+.hero__copy p {
+  margin: 0 0 10px;
+}
+
+.hero__copy p:last-child {
+  margin-bottom: 0;
+}
+
 .hero__actions {
   display: flex;
   flex-wrap: wrap;

@@ -1,8 +1,14 @@
 {
   "title": "새 작품 제목",
   "slug": "new-novel",
+  "author": "BLACKINK",
   "cover": "/new-novel-hero.png",
-  "description": "독자에게 보여줄 작품 소개를 적습니다.",
+  "description": "독자에게 보여줄 짧은 작품 소개를 적습니다.",
+  "synopsis": [
+    "작품을 여는 첫 문장입니다.",
+    "작품의 세계와 주인공을 소개하는 문단입니다.",
+    "독자가 다음 장을 펼치게 만들 마지막 문장입니다."
+  ],
   "language": "ko",
   "genre": "genre_name",
   "status": "serializing",
