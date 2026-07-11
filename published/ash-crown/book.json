@@ -1,12 +1,12 @@
 {
-  "cover": "/ash-crown-hero.png",
-  "description": "검보다 변명에 익숙한 열일곱 왕자 레온의 성장과 몰락의 왕국을 다루는 기사도 판타지.",
-  "genre": "realistic_chivalric_fantasy",
-  "title": "애쉬 크라운: 에르디아의 황혼",
-  "current_chapter": 1,
-  "status": "serializing",
-  "slug": "ash-crown",
-  "active_volume": "volume_01",
   "author": "BLACKINK",
-  "language": "ko"
+  "genre": "realistic_chivalric_fantasy",
+  "status": "serializing",
+  "current_chapter": 1,
+  "description": "검보다 변명에 익숙한 열일곱 왕자 레온이 사랑하던 왕국의 함락 속에서 살아남는 기사도 판타지.",
+  "cover": "/ash-crown-hero.png",
+  "language": "ko",
+  "active_volume": "volume_01",
+  "title": "애쉬 크라운: 에르디아의 황혼",
+  "slug": "ash-crown"
 }
