@@ -8,20 +8,27 @@
   "current_chapter": 25,
   "status": "serializing",
   "language": "ko",
-  "active_volume": "volume_02",
+  "active_volume": "volume_03",
   "volumes": [
     {
       "slug": "volume_01",
       "label": "VOLUME 01",
-      "title": "백합이 지기 전",
-      "description": "왕국의 생일을 앞둔 소년 왕자 레온이 사랑하던 일상과 함께, 다가오는 함락의 조짐을 마주한다.",
+      "title": "왕국의 마지막 봄",
+      "description": "왕국의 마지막 봄, 소년 왕자 레온은 사랑하던 일상 속에서 다가오는 함락의 조짐을 마주한다.",
       "chapter_count": 25
     },
     {
       "slug": "volume_02",
       "label": "VOLUME 02",
-      "title": "왕 없는 길",
-      "description": "왕국을 잃은 레온은 브레노크 보루에서 살아남은 사람들의 이름과 겨울을 지키는 법을 배운다.",
+      "title": "검은재를 넘어서",
+      "description": "왕국을 잃은 레온은 검은재 고개를 넘어 브레노크 보루와 북방의 겨울에 도착한다.",
+      "chapter_count": 25
+    },
+    {
+      "slug": "volume_03",
+      "label": "VOLUME 03",
+      "title": "잿빛 깃발",
+      "description": "두 소드마스터의 죽음과 제국의 두 번째 침략 속에서, 레온은 북방의 사람들과 첫 망명 세력을 세운다.",
       "chapter_count": 25
     }
   ]
