@@ -27,7 +27,7 @@ const next = chapters[currentIndex + 1];
 <BaseLayout title={`${chapter.title} | ${book.title}`} description={chapter.excerpt}>
   <main class="reader">
     <header class="reader-header">
-      <a class="home-link" href="/contents/">목차</a>
+      <a class="home-link" href="/">작품 홈</a>
       <p>{book.title}</p>
       <h1>{chapter.title}</h1>
     </header>
@@ -46,7 +46,7 @@ const next = chapters[currentIndex + 1];
           <span></span>
         )
       }
-      <a class="reader-nav__index" href="/contents/">목차</a>
+      <a class="reader-nav__index" href="/">작품 홈</a>
       {
         next ? (
           <a href={`/chapters/${next.slug}/`}>

@@ -420,34 +420,6 @@ h1 {
   padding: 34px 0 72px;
 }
 
-.contents-page {
-  min-height: 100vh;
-}
-
-.contents-hero {
-  width: min(1120px, calc(100% - 40px));
-  margin: 0 auto;
-  padding: 42px 0 18px;
-  border-bottom: 1px solid var(--line);
-}
-
-.contents-hero h1 {
-  max-width: none;
-  margin-top: 28px;
-  color: var(--ink);
-  font-size: clamp(3.5rem, 10vw, 7.5rem);
-}
-
-.contents-hero > p:not(.section-label) {
-  margin: 14px 0 0;
-  color: var(--muted);
-  font-size: clamp(1.05rem, 2vw, 1.35rem);
-}
-
-.contents-hero__button {
-  margin-top: 28px;
-}
-
 .home-link--dark {
   background: var(--paper-strong);
 }
@@ -614,10 +586,6 @@ h1 {
     grid-template-columns: 54px minmax(0, 1fr);
     min-height: 128px;
     padding: 16px;
-  }
-
-  .contents-hero {
-    padding-top: 28px;
   }
 
   .reader-nav {
