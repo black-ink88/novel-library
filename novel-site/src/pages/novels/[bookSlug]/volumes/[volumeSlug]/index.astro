@@ -1,0 +1,53 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getBook, getChapters, getBooks, getVolumes } from "@/lib/chapters";
+import { sitePath } from "@/lib/site";
+
+export async function getStaticPaths() {
+  const books = await getBooks();
+  const paths = [];
+  for (const book of books) {
+    const volumes = await getVolumes(book.slug);
+    paths.push(...volumes.map((volume) => ({ params: { bookSlug: book.slug, volumeSlug: volume.slug } })));
+  }
+  return paths;
+}
+
+const { bookSlug, volumeSlug } = Astro.params;
+const book = await getBook(bookSlug);
+const volumes = await getVolumes(book.slug);
+const volume = volumes.find((item) => item.slug === volumeSlug);
+const chapters = await getChapters(book.slug, volumeSlug);
+const first = chapters.at(0);
+
+if (!volume) {
+  return Astro.redirect(sitePath(`/novels/${book.slug}/`));
+}
+---
+
+<BaseLayout title={`${volume.label} | ${book.title}`} description={volume.description}>
+  <main>
+    <section class="site-shell chapter-list" aria-labelledby="chapter-list-title">
+      <div class="chapter-list__header">
+        <div>
+          <a class="home-link" href={sitePath(`/novels/${book.slug}/`)}>작품 홈</a>
+          <p class="section-label">{volume.label}</p>
+          <h1 id="chapter-list-title">{volume.title}</h1>
+        </div>
+        <div class="chapter-list__tools"><span>{chapters.length}화</span></div>
+      </div>
+      <div class="chapters chapters--single">
+        {chapters.map((chapter) => (
+          <a class="chapter-card chapter-card--row" href={sitePath(`/novels/${book.slug}/volumes/${volume.slug}/chapters/${chapter.slug}/`)}>
+            <span>{String(chapter.number).padStart(2, "0")}</span>
+            <div>
+              <h2>{chapter.title}</h2>
+              <p>{chapter.excerpt}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+      {first && <a class="button button--primary" href={sitePath(`/novels/${book.slug}/volumes/${volume.slug}/chapters/${first.slug}/`)}>처음부터 읽기</a>}
+    </section>
+  </main>
+</BaseLayout>

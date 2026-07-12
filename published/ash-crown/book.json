@@ -8,5 +8,21 @@
   "current_chapter": 25,
   "status": "serializing",
   "language": "ko",
-  "active_volume": "volume_02"
+  "active_volume": "volume_02",
+  "volumes": [
+    {
+      "slug": "volume_01",
+      "label": "VOLUME 01",
+      "title": "백합이 지기 전",
+      "description": "왕국의 생일을 앞둔 소년 왕자 레온이 사랑하던 일상과 함께, 다가오는 함락의 조짐을 마주한다.",
+      "chapter_count": 25
+    },
+    {
+      "slug": "volume_02",
+      "label": "VOLUME 02",
+      "title": "왕 없는 길",
+      "description": "왕국을 잃은 레온은 브레노크 보루에서 살아남은 사람들의 이름과 겨울을 지키는 법을 배운다.",
+      "chapter_count": 25
+    }
+  ]
 }

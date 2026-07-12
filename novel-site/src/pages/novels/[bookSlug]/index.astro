@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { getBook, getChapters, getBooks } from "@/lib/chapters";
+import { getBook, getChapters, getBooks, getVolumes } from "@/lib/chapters";
 import { sitePath } from "@/lib/site";
 
 export async function getStaticPaths() {
@@ -10,8 +10,10 @@ export async function getStaticPaths() {
 
 const { bookSlug } = Astro.params;
 const book = await getBook(bookSlug);
-const chapters = await getChapters(book.slug);
-const first = chapters.at(0);
+const volumes = await getVolumes(book.slug);
+const firstVolume = volumes.at(0);
+const firstChapters = firstVolume ? await getChapters(book.slug, firstVolume.slug) : await getChapters(book.slug);
+const first = firstChapters.at(0);
 ---
 
 <BaseLayout title={`${book.title} | 작품 홈`} description={book.description}>
@@ -27,7 +29,7 @@ const first = chapters.at(0);
           {book.synopsis?.map((paragraph) => <p>{paragraph}</p>) ?? <p>{book.description ?? "이야기의 첫 장을 펼쳐 보세요."}</p>}
         </div>
         <div class="hero__actions">
-          <a class="button button--primary" href={sitePath(first ? `/novels/${book.slug}/chapters/${first.slug}/` : `/novels/${book.slug}/`)}>처음부터 읽기</a>
+          <a class="button button--primary" href={sitePath(first && firstVolume ? `/novels/${book.slug}/volumes/${firstVolume.slug}/chapters/${first.slug}/` : `/novels/${book.slug}/`)}>처음부터 읽기</a>
         </div>
       </div>
     </section>
@@ -35,24 +37,17 @@ const first = chapters.at(0);
     <section class="site-shell chapter-list" aria-labelledby="chapter-list-title">
       <div class="chapter-list__header">
         <div>
-          <p class="section-label">Volume 01</p>
-          <h2 id="chapter-list-title">목차</h2>
-        </div>
-        <div class="chapter-list__tools">
-          <span>{chapters.length}회</span>
-          <div class="chapter-sort" role="group" aria-label="회차 정렬">
-            <button class="chapter-sort__button is-active" type="button" data-sort="ascending" aria-pressed="true">처음부터</button>
-            <button class="chapter-sort__button" type="button" data-sort="descending" aria-pressed="false">최신화순</button>
-          </div>
+          <p class="section-label">Volumes</p>
+          <h2 id="chapter-list-title">권 목록</h2>
         </div>
       </div>
-      <div class="chapters chapters--single" id="chapter-list">
-        {chapters.map((chapter) => (
-          <a class="chapter-card chapter-card--row" data-chapter-number={chapter.number} href={sitePath(`/novels/${book.slug}/chapters/${chapter.slug}/`)}>
-            <span>{String(chapter.number).padStart(2, "0")}</span>
+      <div class="chapters chapters--single">
+        {volumes.map((volume) => (
+          <a class="chapter-card chapter-card--row" href={sitePath(`/novels/${book.slug}/volumes/${volume.slug}/`)}>
+            <span>{volume.label.replace("VOLUME ", "")}</span>
             <div>
-              <h2>{chapter.title}</h2>
-              <p>{chapter.excerpt}</p>
+              <h2>{volume.title}</h2>
+              <p>{volume.description ?? `${volume.chapter_count ?? 0}화`}</p>
             </div>
           </a>
         ))}
@@ -60,29 +55,3 @@ const first = chapters.at(0);
     </section>
   </main>
 </BaseLayout>
-
-<script>
-  const chapterList = document.querySelector<HTMLElement>("#chapter-list");
-  const sortButtons = document.querySelectorAll<HTMLButtonElement>("[data-sort]");
-
-  sortButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      if (!chapterList) return;
-
-      const cards = Array.from(chapterList.querySelectorAll<HTMLElement>("[data-chapter-number]"));
-      const descending = button.dataset.sort === "descending";
-      cards
-        .sort((a, b) => {
-          const difference = Number(a.dataset.chapterNumber) - Number(b.dataset.chapterNumber);
-          return descending ? -difference : difference;
-        })
-        .forEach((card) => chapterList.appendChild(card));
-
-      sortButtons.forEach((item) => {
-        const active = item === button;
-        item.classList.toggle("is-active", active);
-        item.setAttribute("aria-pressed", String(active));
-      });
-    });
-  });
-</script>

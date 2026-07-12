@@ -24,6 +24,15 @@ export type Book = {
   cover?: string;
   description?: string;
   synopsis?: string[];
+  volumes?: Volume[];
+};
+
+export type Volume = {
+  slug: string;
+  label: string;
+  title: string;
+  description?: string;
+  chapter_count?: number;
 };
 
 export type Chapter = {
@@ -71,8 +80,13 @@ export async function getBook(slug = "ash-crown"): Promise<Book> {
   return JSON.parse(raw) as Book;
 }
 
-export async function getChapters(bookSlug = "ash-crown"): Promise<Chapter[]> {
-  const { root, files } = await findPublishedManuscripts(bookSlug);
+export async function getVolumes(bookSlug = "ash-crown"): Promise<Volume[]> {
+  const book = await getBook(bookSlug);
+  return book.volumes ?? [];
+}
+
+export async function getChapters(bookSlug = "ash-crown", volumeSlug?: string): Promise<Chapter[]> {
+  const { root, files } = await findPublishedManuscripts(bookSlug, volumeSlug);
   const chapterFiles = files
     .filter((file) => /^ch\d+_draft\.md$/.test(file))
     .sort((a, b) => a.localeCompare(b, "en"));
@@ -96,8 +110,8 @@ export async function getChapters(bookSlug = "ash-crown"): Promise<Chapter[]> {
   );
 }
 
-export async function getChapter(bookSlug: string, slug: string): Promise<RenderedChapter | undefined> {
-  const chapters = await getChapters(bookSlug);
+export async function getChapter(bookSlug: string, slug: string, volumeSlug?: string): Promise<RenderedChapter | undefined> {
+  const chapters = await getChapters(bookSlug, volumeSlug);
   const chapter = chapters.find((item) => item.slug === slug);
 
   if (!chapter) {
@@ -114,9 +128,11 @@ export async function getChapter(bookSlug: string, slug: string): Promise<Render
   };
 }
 
-async function findPublishedManuscripts(bookSlug: string): Promise<{ root: string; files: string[] }> {
+async function findPublishedManuscripts(bookSlug: string, volumeSlug?: string): Promise<{ root: string; files: string[] }> {
   const bookRoot = path.join(novelsRoot, bookSlug);
-  const root = path.join(bookRoot, "chapters");
+  const root = volumeSlug
+    ? path.join(bookRoot, "volumes", volumeSlug, "chapters")
+    : path.join(bookRoot, "chapters");
 
   try {
     const files = await readdir(root);
