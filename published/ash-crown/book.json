@@ -8,7 +8,7 @@
   "current_chapter": 25,
   "status": "serializing",
   "language": "ko",
-  "active_volume": "volume_04",
+  "active_volume": "volume_05",
   "volumes": [
     {
       "slug": "volume_01",
@@ -36,6 +36,13 @@
       "label": "VOLUME 04",
       "title": "깨진 맹약",
       "description": "루메른 멸망과 제국의 서진 속에서, 레온은 명령권이 아닌 철수권과 책임을 담보로 서부의 한시 맹약을 얻는다.",
+      "chapter_count": 25
+    },
+    {
+      "slug": "volume_05",
+      "label": "VOLUME 05",
+      "title": "문장 아래의 검",
+      "description": "왕가의 유산검 스타폴과 문장 없는 바스티온을 찾아 나선 레온은, 힘을 켜는 법보다 필요한 순간에 끄는 법을 배운다.",
       "chapter_count": 25
     }
   ]
