@@ -8,7 +8,7 @@
   "current_chapter": 25,
   "status": "serializing",
   "language": "ko",
-  "active_volume": "volume_05",
+  "active_volume": "volume_06",
   "volumes": [
     {
       "slug": "volume_01",
@@ -43,6 +43,13 @@
       "label": "VOLUME 05",
       "title": "문장 아래의 검",
       "description": "왕가의 유산검 스타폴과 문장 없는 바스티온을 찾아 나선 레온은, 힘을 켜는 법보다 필요한 순간에 끄는 법을 배운다.",
+      "chapter_count": 25
+    },
+    {
+      "slug": "volume_06",
+      "label": "VOLUME 06",
+      "title": "문장 없는 왕관",
+      "description": "왕도 사람들의 선택으로 닫힌 문이 다시 열리는 동안, 레온은 왕가의 보물이 아니라 자신이 감당한 대가로 왕관 앞에 선다.",
       "chapter_count": 25
     }
   ]
